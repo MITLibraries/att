@@ -33,7 +33,7 @@ public class EmailUtil {
             emailSender.send(message);
             logger.debug("Email sent to:{} with subject:{}", to, subject);
         } catch (MailException e) {
-            logger.error("Error sending email to: {}", to, e);
+            logger.debug("Error sending email to: {}", to, e);
         }
     }
 
