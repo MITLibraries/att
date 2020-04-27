@@ -1,5 +1,7 @@
 # Digital Transfer Tool
 
+[![Build Status](https://travis-ci.com/MITLibraries/att.svg?branch=master)](https://travis-ci.com/MITLibraries/att)
+
 The application enables secure and reliable transfer of records, archives, research data, or other digital content to Libraries’
 Collections staff as a step in the digital curation workflow. There is currently no web-based tool available at MIT to 
 donors or creators of digital material that they can use to securely and reliably transfer digital files and 
