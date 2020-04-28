@@ -46,9 +46,11 @@ public class AdminController {
 
         logger.info("Test mode:{}", env.getRequiredProperty("testing.status"));
 
-        // Get session information:
-
         String principal = (String) httpServletRequest.getAttribute("mail");
+
+        if (principal == null || principal.isEmpty()) {
+            principal = httpServletRequest.getHeader("mail");
+        }
 
         // logger.info("Mail attribute:{}", principal);
 
@@ -57,8 +59,7 @@ public class AdminController {
         }
 
 
-        Role role = null;
-        role = subject.getRole(principal);
+        Role role = subject.getRole(principal);
 
         if ((!role.equals(Role.siteadmin)) && !role.equals(Role.deptadmin)) { //TODO restrict further dept admin
             logger.debug("User does not have permissions to access the admin page");

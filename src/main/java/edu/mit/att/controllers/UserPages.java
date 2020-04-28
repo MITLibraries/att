@@ -130,11 +130,15 @@ public class UserPages {
 
         model.addAttribute("departments", 0);
 
-        final String principal = (String) httpServletRequest.getAttribute("mail");
+        String principal = (String) httpServletRequest.getAttribute("mail");
 
-        if (principal == null) {
+        if (principal == null || principal.isEmpty()) {
+            principal = httpServletRequest.getHeader("mail");
+        }
+
+        if (principal == null || principal.isEmpty()) {
             LOGGER.severe("Error getting current user");
-            throw new RuntimeException(); //TODO
+            throw new RuntimeException("Error getting current user");
         }
 
         // LOGGER.info("Mail attribute:" + principal);
