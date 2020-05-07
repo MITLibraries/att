@@ -145,7 +145,6 @@
                                                     document<span
                                                         th:if="*{transferRequests[__${stat.index}__].rsaFileDataForms.size() != 1}"></span>
                                                     <br/>
-                                                    <a th:href="@{/DownloadZipFile(rsaid=*{transferRequests[__${stat.index}__].id}, redirect='ListDraftRsas')}">Download</a>
                                                     <!--<a th:href="@{/ListDraftFiles(rsaid=*{transferRequests[__${stat.index}__].id})}">&#9632;</a>&nbsp;&nbsp;<a
                                                         th:onclick="*{'return confirm_delete_inventory(' + transferRequests[__${stat.index}__].rsaFileDataForms.size() + ')'}"
                                                         th:href="@{/DeleteDraftInventory(rsaid=*{transferRequests[__${stat.index}__].id})}">Delete</a>-->

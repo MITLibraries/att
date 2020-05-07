@@ -92,7 +92,7 @@ public class RsaAdmin {
         model.addAttribute("downloadfailed", downloadfailed);
 
         List<TransferRequest> transferRequests = rsarepo.findByApprovedFalseAndDeletedFalseOrderByTransferdateAsc();
-        LOGGER.info("Found requests:" + transferRequests);
+        LOGGER.info("Found requests:" + transferRequests.size());
 
         model.addAttribute(RSAS_FORMS, transferRequests);
 
