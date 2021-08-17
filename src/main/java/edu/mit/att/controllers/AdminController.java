@@ -48,7 +48,7 @@ public class AdminController {
 
         // Get session information:
 
-        String principal = (String) httpServletRequest.getAttribute("mail");
+        String principal = (String) httpServletRequest.getHeader("mail");
 
         // logger.info("Mail attribute:{}", principal);
 

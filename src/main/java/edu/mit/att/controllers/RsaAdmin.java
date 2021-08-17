@@ -81,7 +81,7 @@ public class RsaAdmin {
 
         // authz logic:
 
-        final String userAttrib = (String) request.getAttribute("mail");
+        final String userAttrib = (String) request.getHeader("mail");
         final User user = userrepo.findByEmail(userAttrib).get(0);
 
         if (!user.getRole().equals(Role.siteadmin.name())) {
@@ -111,7 +111,7 @@ public class RsaAdmin {
 
         // authz logic:
 
-        final String userAttrib = (String) request.getAttribute("mail");
+        final String userAttrib = (String) request.getHeader("mail");
         final User user = userrepo.findByEmail(userAttrib).get(0);
 
         if (!user.getRole().equals(Role.siteadmin.name())) {
@@ -567,7 +567,7 @@ public class RsaAdmin {
 
         // authz logic:
 
-        final String userAttrib = (String) request.getAttribute("mail");
+        final String userAttrib = (String) request.getHeader("mail");
         final User user = userrepo.findByEmail(userAttrib).get(0);
 
         if (!user.getRole().equals(Role.siteadmin.name())) {

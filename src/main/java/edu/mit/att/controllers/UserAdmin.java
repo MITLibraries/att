@@ -60,8 +60,8 @@ public class UserAdmin {
 
         // TODO authz -- filter by what users the admin can see
 
-        final String email = (String) request.getAttribute("mail");
-        // logger.debug("User:{}",  email);
+        final String email = (String) request.getHeader("mail");
+        logger.debug("User:{}",  email);
 
         final List<User> currentUsers = userrepo.findByEmail(email);
 
@@ -128,7 +128,7 @@ public class UserAdmin {
 
         // Authz: if the user is not a siteadmin or a department admin don't let him change the role;
 
-        final String userAttrib = (String) request.getAttribute("mail");
+        final String userAttrib = (String) request.getHeader("mail");
 
         final User user = userrepo.findByEmail(userAttrib).get(0);
 
