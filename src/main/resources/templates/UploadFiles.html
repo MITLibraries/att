@@ -38,18 +38,19 @@
 
                 <div class="col3q">
 
-                    <h3 class="title-page">Add Digital Content Files</h3>
+                    <h3 class="title-page">Add Digital Content File</h3>
 
                     <form method="post" th:action="@{/UploadComplete}" enctype="multipart/form-data" id="form">
-                        <p>Please select the file you would like to upload below. An inventory will be automatically generated for you. Alternatively, you can create and upload an inventory document to submit. </p>
-                        <p class="tip" id="maxuploadsize">The total size of all files to be uploaded must be less than <span th:text="${avail_bytes}"></span>.</p>
+                        <p> Please select the file you would like to upload below. If you have multiple files or folders, you will have to combine them into a ZIP  folder first. Please see the Submission Instructions tab for information related to the creation of the .zip folder.
+                            You can create and include in the Zip file an inventory document of the filenames that are included in the Zip file. </p>
+                        <p class="tip" id="maxuploadsize">The total size of file to be uploaded must be less than <span th:text="${avail_bytes}"></span>.</p>
 
                         <input type="hidden" name="filedata" id="filedata"/>
                         <input name="file_counter" type="hidden" value="1" id="file_counter"/>
                         <input name="havail_bytes" type="hidden" value="empty" id="havail_bytes"/>
 
                         <fieldset>
-                            <legend>Select files to submit to the DDC</legend>
+                            <legend>Select file to submit to the DDC</legend>
 
                             <div id="fileobj" class="wrap-file-upload">
 
@@ -74,7 +75,7 @@
                             <input class="btn button-secondary button-add" type="button" value="Add another file" onclick="addit( this  )"/>
 -->
 
-                            <input class="btn button-secondary warn" type="button" value="Remove all files" onclick="clearfiles()"/>
+                            <input class="btn button-secondary warn" type="button" value="Remove file" onclick="clearfiles()"/>
 
                         </fieldset>
 
@@ -95,14 +96,15 @@
 
                     <hr />
 
-                    <p>Uploads for large files can take significant time. Please leave this page open while the files upload.</p>
+                    <p>Uploads for large files can take significant time. Please leave this page open while the file uploads.</p>
 
                 </div>
                 <aside class="content-sup col1q-r" role="complementary">
                     <div id="contact-iasc" class="bit">
                         <h3 class="title">Questions? Contact us.</h3>
-                        <p><a href="mailto:ddc-offers@mit.edu">ddc-offers@mit.edu</a><br />
-                        617.253.5136</p>
+                        <p>For the records: <br /> <a href="mailto:ddc-offers@mit.edu">ddc-offers@mit.edu</a></p>
+                        <p>Institute office contact: <a href="mailto:ddc-offers@mit.edu">rmprogram@mit.edu</a><br />
+                            617.253.5136</p>
                     </div>
                 </aside>
             </div>
