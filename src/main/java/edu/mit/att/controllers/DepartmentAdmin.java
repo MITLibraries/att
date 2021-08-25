@@ -54,7 +54,15 @@ public class DepartmentAdmin {
 
         final Department item = new Department();
 
-        final String userAttrib = (String) request.getHeader("mail");
+        String userAttrib;
+        userAttrib = request.getHeader("mail");
+
+        if (userAttrib == null) {
+            userAttrib = (String) request.getAttribute("mail");
+        }
+
+        LOGGER.info("Finding by email" + userAttrib);
+
         final User user = userrepo.findByEmail(userAttrib).get(0);
 
         if (!user.getRole().equals(Role.siteadmin.name())) {
@@ -118,8 +126,12 @@ public class DepartmentAdmin {
     ) {
         LOGGER.info( "EditDepartment Get");
 
-        final String userAttrib = (String) request.getHeader("mail");
-        final User user = userrepo.findByEmail(userAttrib).get(0);
+        String userAttrib;
+        userAttrib = request.getHeader("mail");
+
+        if (userAttrib == null) {
+            userAttrib = (String) request.getAttribute("mail");
+        }        final User user = userrepo.findByEmail(userAttrib).get(0);
 
         final Set<Department> departments = user.getDepartments();
 
