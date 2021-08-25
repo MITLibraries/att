@@ -3,6 +3,6 @@ env:
   SPRING_PROFILES_ACTIVE=dev
   TESTING_STATUS=true
 script:
-  - mvn clean verify -Pdev
+  - mvn -Dspring.profiles.active=dev clean package -P dev
 jdk:
   - openjdk8

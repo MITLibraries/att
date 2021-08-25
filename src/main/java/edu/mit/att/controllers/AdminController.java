@@ -44,7 +44,7 @@ public class AdminController {
     @RequestMapping(value = {"admin", "Admin"}, method = RequestMethod.GET)
     public ModelAndView showItemsPage(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 
-        logger.info("Test mode:{}", env.getRequiredProperty("testing.status"));
+        //logger.info("Test mode:{}", env.getRequiredProperty("testing.status"));
 
         // Get session information:
 
@@ -52,7 +52,7 @@ public class AdminController {
 
         // logger.info("Mail attribute:{}", principal);
 
-        if (env.getRequiredProperty("testing.status").equals("true")) {
+        if (env.getRequiredProperty("spring.profiles.active").equals("dev")) {
             principal = env.getRequiredProperty("testing.mail");
         }
 

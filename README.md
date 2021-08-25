@@ -16,13 +16,13 @@ Docker or Apache Maven
 Installation (Maven)
 ----------------------
 
-This is a Maven based project:
+This is a Maven based project. Assuming you've installed Maven...
 
 ```sh
 
 # from the folder, run the build, and package it:
 
-mvn clean package -P dev
+mvn -Dspring.profiles.active=dev clean package -P dev
 
 # after building, test it:
 
@@ -61,30 +61,27 @@ Now if you want to make a change to the app:
 - Run the image again (```docker run```).
 
 
-Installation (Production Server)
+Deployment (Production)
 -------------------------------
 
 Adjust application.properties to:
 
 - point to the correct share directory on the server.
-- change testing to false
-- update with SMTP password
+- (optional: update with SMTP password)
 
-
-Build using Maven and copy the result .war file to the Tomcat instance.
-
+Build using Maven and copy the result .war file to the Tomcat instance:
 
 ```sh
 
 # from the folder, run the build, and package it:
 
-mvn clean package -P dev
+mvn -Dspring.profiles.active=prod clean package -P prod
 
 # scp target/att-0.0.1-SNAPSHOT.war user@server:/usr/share/tomcat/webapps
 
 ```
 
-Replace user, server, and tomcat webapp locations, as appropriate.
+Note: Replace user, server, and tomcat webapp path, as appropriate.
 
 Tomcat should load the web app after a few moments. Browse to the webapp (specified below)
 to confirm the application is working.
@@ -92,8 +89,8 @@ to confirm the application is working.
 To debug, you can tail the following files:
 
 ``` sh
-tail -f /usr/share/tomcat/tmp/palmquist-logs/debug.log
-sudo tail -f /usr/share/tomcat/logs/localhost.yyyy-mm-dd.log
+ sudo tail -f /opt/tomcat/logs/catalina.out
+ sudo tail -f /usr/share/tomcat/logs/localhost.yyyy-mm-dd.log
 ```
 
 Change Tomcat location, as necessary.
@@ -109,17 +106,17 @@ To run a single test:
 mvn surefire:test -Dtest=DepartmentHttpRequestTest#testAddPage -Pdev
 ```
 
-Production Server
+Design
 ---------------------
 
-Currently, the application is running on https:arcsubmit mit.edu/att.
+Currently, the application is running on https:arcsubmit mit.edu/att and arcsubmit-stage.
 
-Server set up: Apache httpd (for Shibboleth), Apache Tomcat, Embedded database (to be migrated)
+Server set up: Apache httpd (for Shibboleth), Apache Tomcat, MySql
 
 Documentation
 --------------
 
-The FAQ web page provides background information on the submission process.
+The app's FAQ web page provides background information on the submission process.
 
 
 Contributors
