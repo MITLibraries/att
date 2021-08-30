@@ -41,8 +41,8 @@
                     <h3 class="title-page">Add Digital Content File</h3>
 
                     <form method="post" th:action="@{/UploadComplete}" enctype="multipart/form-data" id="form">
-                        <p> Please select the file you would like to upload below. If you have multiple files or folders, you will have to combine them into a ZIP  folder first. Please see the Submission Instructions tab for information related to the creation of the .zip folder.
-                            You can create and include in the Zip file an inventory document of the filenames that are included in the Zip file. </p>
+                        <p> Please select the file you would like to upload. If you have multiple files or folders, you will first need to combine them into a single .zip folder. Please see step 9 on the Submission Instructions tab for information related to the creation of the .zip folder.
+                        </p>
                         <p class="tip" id="maxuploadsize">The total size of file to be uploaded must be less than <span th:text="${avail_bytes}"></span>.</p>
 
                         <input type="hidden" name="filedata" id="filedata"/>
