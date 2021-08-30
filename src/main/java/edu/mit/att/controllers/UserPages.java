@@ -130,9 +130,15 @@ public class UserPages {
 
         model.addAttribute("departments", 0);
 
-        final String principal = (String) httpServletRequest.getHeader("mail");
+        String principal = (String) httpServletRequest.getHeader("mail");
+
+        // diff in staging and production env causes this:
 
         if (principal == null) {
+            principal = (String) httpServletRequest.getAttribute("mail");
+        }
+
+        if (principal == null) { // if still null
             LOGGER.severe("Error getting current user");
             throw new RuntimeException(); //TODO
         }

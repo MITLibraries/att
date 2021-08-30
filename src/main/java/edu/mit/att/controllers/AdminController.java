@@ -50,6 +50,12 @@ public class AdminController {
 
         String principal = (String) httpServletRequest.getHeader("mail");
 
+        // diff in staging and production env causes this:
+
+        if (principal == null) { // if still null
+            principal = (String) httpServletRequest.getAttribute("mail");
+        }
+
         // logger.info("Mail attribute:{}", principal);
 
         if (env.getRequiredProperty("spring.profiles.active").equals("dev")) {
