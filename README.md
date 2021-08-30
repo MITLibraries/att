@@ -64,9 +64,10 @@ Now if you want to make a change to the app:
 Deployment (Production)
 -------------------------------
 
-Adjust application.properties to:
+Find and adjust application.properties to:
 
-- point to the correct share directory on the server.
+- point to the correct share directory on the server (where files are submitted).
+  - correct mysql creds
 - (optional: update with SMTP password)
 
 Build using Maven and copy the result .war file to the Tomcat instance:
@@ -75,13 +76,17 @@ Build using Maven and copy the result .war file to the Tomcat instance:
 
 # from the folder, run the build, and package it:
 
-mvn -Dspring.profiles.active=prod clean package -P prod
+mvn clean package -P prod
 
 # scp target/att-0.0.1-SNAPSHOT.war user@server:/usr/share/tomcat/webapps
 
 ```
 
-Note: Replace user, server, and tomcat webapp path, as appropriate.
+Note: Replace user, server, and tomcat webapp path, as appropriate. Also ensure that sentenv.sh in Tomcat has this line
+
+```shell
+export SPRING_PROFILES_ACTIVE=prod
+```
 
 Tomcat should load the web app after a few moments. Browse to the webapp (specified below)
 to confirm the application is working.

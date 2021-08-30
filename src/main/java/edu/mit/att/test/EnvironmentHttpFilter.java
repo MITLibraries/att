@@ -36,7 +36,7 @@ public class EnvironmentHttpFilter implements Filter {
 
     //  this annotation is required to inject the environment. but it should not be injected
     // in touchstone class. adding annotation there makes the class loading fail. hence this class.
-    @Resource
+    //@Resource
     private Environment env;
 
     @Value("${testing.mail:test}")
@@ -69,7 +69,7 @@ public class EnvironmentHttpFilter implements Filter {
 
        // if (env != null && env.getRequiredProperty("testing.status").equals("true")) {
             logger.info("In test mode. Setting mail value to: {}", email);
-            if (env != null) httpServletRequest.setAttribute("mail", email);
+            httpServletRequest.setAttribute("mail", email);
         //}
 
         filterChain.doFilter(servletRequest, servletResponse);
