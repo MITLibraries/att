@@ -13,10 +13,10 @@ Software Requirements
 Docker or Apache Maven
 
 
-Installation (Maven)
-----------------------
+Installation locally (using Maven)
+----------------------------------
 
-This is a Maven based project. Assuming you've installed Maven...
+This is a vanilla Maven based project. Install Maven, and then..
 
 ```sh
 
@@ -32,7 +32,58 @@ java -jar target/att-0.0.1-SNAPSHOT.war
 
 Visit `http://localhost:8080/att`.
 
-Testing with Docker
+
+
+
+Deployment (on Production)
+-------------------------------
+
+(See also design notes on infrastrure set up.)
+
+For production, we need to run the .war with application-prod.properties, where the connection
+to MySql and the path to file share is specified. Most of the settings are already there (except the password, which is read from 
+a config file on the stage and production server itself.)
+
+Adjust application-prod.properties (in `resources` folder) to:
+
+- point to the correct share directory on the server (where files are submitted). The paths are slightly different on 
+  stage and prod (see application-prod.properties for the exact path)
+- ensure tomcat setenv.sh has the password set and Spring profile as active (see below).
+
+Build using Maven on your machine as follows, and copy the resulting .war file to the Tomcat instance:
+
+```sh
+
+# from the folder, run the build, and copy the file to the correct tomcat location
+
+mvn clean package -P prod
+
+# scp target/att-0.0.1-SNAPSHOT.war user@server:/opt/tomcat/webapps/att.war
+
+```
+
+Note: Replace user, server, and tomcat webapp path, as appropriate. Also ensure that Tomcat's setenv.sh in Tomcat (bin folder) 
+has this line:
+
+```shell
+export SPRING_PROFILES_ACTIVE=prod
+```
+
+Tomcat will load the web app after a few moments. 
+
+To debug, you can `tail` the following files:
+
+``` sh
+ sudo tail -f /opt/tomcat/logs/catalina.out
+ sudo tail -f /opt/tomcat/logs/localhost.yyyy-mm-dd.log
+```
+
+Again, change Tomcat location (from `/opt/tomcat`, for example), as necessary.
+
+Hit server:8080/att to see the app in action.
+The application logs folder can be changed in .properties.
+
+Docker testing
 -----------------------
 
 For convenience, the project can be launched with Docker
@@ -60,49 +111,7 @@ Now if you want to make a change to the app:
 - Run the image build command (```docker build```), as described above (it should take a second now).
 - Run the image again (```docker run```).
 
-
-Deployment (Production)
--------------------------------
-
-Find and adjust application.properties to:
-
-- point to the correct share directory on the server (where files are submitted).
-  - correct mysql creds
-- (optional: update with SMTP password)
-
-Build using Maven and copy the result .war file to the Tomcat instance:
-
-```sh
-
-# from the folder, run the build, and package it:
-
-mvn clean package -P prod
-
-# scp target/att-0.0.1-SNAPSHOT.war user@server:/usr/share/tomcat/webapps
-
-```
-
-Note: Replace user, server, and tomcat webapp path, as appropriate. Also ensure that sentenv.sh in Tomcat has this line
-
-```shell
-export SPRING_PROFILES_ACTIVE=prod
-```
-
-Tomcat should load the web app after a few moments. Browse to the webapp (specified below)
-to confirm the application is working.
-
-To debug, you can tail the following files:
-
-``` sh
- sudo tail -f /opt/tomcat/logs/catalina.out
- sudo tail -f /usr/share/tomcat/logs/localhost.yyyy-mm-dd.log
-```
-
-Change Tomcat location, as necessary.
-
-The application logs folder can be changed in application.properties.
-
-Unit Tests
+Single unit test running
 -----------
 
 To run a single test:
@@ -111,12 +120,19 @@ To run a single test:
 mvn surefire:test -Dtest=DepartmentHttpRequestTest#testAddPage -Pdev
 ```
 
-Design
+Architecture
 ---------------------
 
 Currently, the application is running on https:arcsubmit mit.edu/att and arcsubmit-stage.
 
-Server set up: Apache httpd (for Shibboleth), Apache Tomcat, MySql
+Server set up: 
+- Apache httpd (with Shibboleth)
+- Apache Tomcat
+- MySql
+- JDK
+
+Note: It is installed on a local VM because it needs to mount to a local share for confidential content (cannot be random S3).
+Do NOT migrate to cloud without discussing the implications with business stakeholders.
 
 Documentation
 --------------
@@ -132,7 +148,7 @@ The project was developed by Osman Din and Frances Botsford.
 
 Acknowledgements
 -----------------
-It is based on a tool developed by the 
+The application is based on a tool developed by the 
 Michigan State University.
 
 

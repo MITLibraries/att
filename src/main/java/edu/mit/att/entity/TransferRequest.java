@@ -34,6 +34,11 @@ public class TransferRequest {
     private int idx;
     private String path; // Osm added path to file
 
+   // theses submission fields, retained for backward schema compatibility since Mikki wanted access to old records
+    private String degrees = "N/A";
+    private String theses = "N/A";
+    private String department = "N/A";
+
     public void setTransferdate(String date) {
         if (date.equals("")) {
             this.transferdate = null;
@@ -92,6 +97,18 @@ public class TransferRequest {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getDegrees() {
+        return degrees;
+    }
+
+    public String getTheses() {
+        return theses;
+    }
+
+    public String getDepartment() {
+        return department;
     }
 
     @Override
