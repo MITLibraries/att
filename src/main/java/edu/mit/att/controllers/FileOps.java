@@ -10,13 +10,11 @@ import edu.mit.att.repository.RsaFileDataFormRepository;
 import edu.mit.att.repository.TransferRequestRepository;
 import edu.mit.att.service.ApprovedRsasFormService;
 import org.apache.commons.io.FileUtils;
-import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 //import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-//import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,17 +43,6 @@ public class FileOps {
 
     @Autowired
     ServletContext context;
-
-    private static VelocityEngine velocityEngine;
-
-   /* @Autowired
-    public void setVelocityEngine(VelocityEngine ve) {
-        velocityEngine = ve;
-    }*/
-
-    /*@Autowired
-    public void setSender(JavaMailSenderImpl sender) {
-    }*/
 
     @Autowired
     private TransferRequestRepository rsarepo;
